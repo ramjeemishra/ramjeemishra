@@ -11,7 +11,8 @@
 
 - 📫 How to reach me **ramjeemishra23@gmail.com**
 
-- ⚡ Fun fact **Why do programmers prefer dark mode? ==> Because light attracts bugs!**
+- ⚡ Fun fact **Why do programmers prefer dark mode?
+-  ==> Because light attracts bugs!**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
