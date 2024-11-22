@@ -5,7 +5,7 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=ramjeemishra" alt="ramjeemishra" /></a> </p>
 
-- 👨‍💻 All of my projects are available at [https://ramjeemishra.github.io/Ramjee_Mishra/](https://ramjeemishra.github.io/Ramjee_Mishra/)
+- 👨‍💻 All of my projects are available at [https://ramjeemishra.netlify.app/](https://ramjeemishra.netlify.app/)
 
 - 📝 I regularly write articles on [https://bulletkey.blogspot.com/](https://bulletkey.blogspot.com/)
 
