@@ -9,9 +9,6 @@
 
 - 📫 How to reach me **ramjeemishra23@gmail.com**
 
-- ⚡ Fun fact **Why do programmers prefer dark mode?
--  ==> Because light attracts bugs!**
-
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://www.linkedin.com/in/ramjee-mishra-705152291/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="ramjee mishra" height="30" width="40" /></a>
