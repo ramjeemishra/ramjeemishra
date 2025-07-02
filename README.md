@@ -7,8 +7,6 @@
 
 - 👨‍💻 All of my projects are available at [https://ramjeemishra.netlify.app/](https://ramjeemishra.netlify.app/)
 
-- 📝 I regularly write articles on [https://bulletkey.blogspot.com/](https://bulletkey.blogspot.com/)
-
 - 📫 How to reach me **ramjeemishra23@gmail.com**
 
 - ⚡ Fun fact **Why do programmers prefer dark mode?
