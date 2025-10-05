@@ -1,0 +1,88 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.text-gray-300 {
+  opacity: 0.9;
+}
+
+section p {
+  opacity: 0.9;
+}
+
+.card-hover p {
+  opacity: 0.9;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a202c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6b46c1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #805ad5;
+}
+
+.fa-robot {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+[class*="fa-robot"] + div::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: rgba(31, 41, 55, 0.9) transparent transparent transparent;
+}
+
+@media (max-width: 768px) {
+  .fa-robot {
+    font-size: 2rem;
+  }
+  [class*="fa-robot"] + div {
+    width: 200px;
+    font-size: 0.9rem;
+    right: -50px;
+  }
+}
+
+
+
+.autoshoww{
+  animation: autoshowanimation  both;
+  animation-timeline: view(70% 5%);
+}
+@keyframes autoshowanimation {
+  from {
+    opacity: 0;
+    transform: translateY(200px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

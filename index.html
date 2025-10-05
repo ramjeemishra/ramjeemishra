@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RM</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const width = window.innerWidth;
+
+            if (width <= 768) {
+                // Mobile
+                window.location.href = "mob.html";
+            } else if (width > 768 && width <= 1024) {
+                // Tablet
+                window.location.href = "mob.html";
+            } else {
+                // PC
+                window.location.href = "desktop.html";
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
