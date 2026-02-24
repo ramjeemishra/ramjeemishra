@@ -134,31 +134,29 @@ export default function StarkApp() {
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Syne:wght@800&family=JetBrains+Mono:wght@500&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; overflow-x: hidden; }
+
         .dashboard-grid {
           background-image: radial-gradient(#E5E7EB 1.2px, transparent 1.2px);
           background-size: 25px 25px;
         }
+
         .stark-card {
           background: #FFF;
           border: 1px solid #E2E8F0;
           border-radius: 6px;
-          padding: 32px;
+          padding: 2rem;
           transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
         }
+
         .stark-card:hover {
           border-color: #00D4FF;
           box-shadow: 0 10px 40px -15px rgba(0,212,255,0.3);
           transform: translateY(-3px);
         }
-        .arc-spinner {
-          width: 80px;
-          height: 80px;
-          border: 3px solid #F3F4F6;
-          border-top: 3px solid #00D4FF;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
+
         .nav-link {
           text-decoration: none;
           color: #64748B;
@@ -166,17 +164,65 @@ export default function StarkApp() {
           font-weight: 700;
           letter-spacing: 2px;
         }
+
         .nav-link:hover { color: #FF3131; }
-        @media (min-width: 900px) {
-          .desktop-nav { display: flex; gap: 40px; }
-          .mobile-btn { display: none; }
+
+        /* Responsive Mobile Menu */
+        .mobile-menu-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background: white;
+          z-index: 150;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 2rem;
+          transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+          transform: translateY(${menuOpen ? "0" : "-100%"});
         }
-        @media (max-width: 899px) {
-          .desktop-nav { display: none; }
-          .mobile-btn { display: block; cursor: pointer; font-weight: 700; }
+
+        .mobile-menu-overlay a {
+          font-family: 'Syne';
+          font-size: 2.5rem;
+          text-decoration: none;
+          color: #111;
+          font-weight: 800;
         }
+
+        @media (max-width: 768px) {
+          section { padding: 80px 5% !important; }
+          .hero-text { left: 5% !important; width: 90% !important; }
+          .hero-text h1 { font-size: 3.5rem !important; }
+          .footer-content { flex-direction: column; gap: 2rem; text-align: center; }
+        }
+          /* Default: Desktop */
+.desktop-nav {
+  display: flex;
+  gap: 40px;
+}
+
+.mobile-btn {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-btn {
+    display: block;
+    cursor: pointer;
+  }
+}
       `}</style>
 
+      {/* Loading Screen */}
       {!loaded && (
         <div style={{ position: "fixed", inset: 0, background: "white", zIndex: 1000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
           <div className="arc-spinner" />
@@ -186,7 +232,8 @@ export default function StarkApp() {
         </div>
       )}
 
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, height: 72, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 6%", zIndex: 100 }}>
+      {/* Improved Navbar */}
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, height: 80, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 6%", zIndex: 200,}}>
         <div style={{ fontFamily: "'Syne'", fontSize: 20, fontWeight: 800 }}>
           RAMJEE<span style={{ color: "#FF3131" }}>.</span>AI
         </div>
@@ -197,35 +244,39 @@ export default function StarkApp() {
           ))}
         </div>
 
-        <div className="mobile-btn" onClick={() => setMenuOpen(!menuOpen)}>MENU</div>
+        <div className="mobile-btn" onClick={() => setMenuOpen(!menuOpen)} style={{ zIndex: 201 }}>
+          <div style={{ width: 30, height: 2, background: "#111", marginBottom: menuOpen ? 0 : 6, transform: menuOpen ? "rotate(45deg) translateY(1px)" : "none", transition: "0.3s" }}></div>
+          <div style={{ width: 30, height: 2, background: "#111", transform: menuOpen ? "rotate(-45deg) translateY(-1px)" : "none", transition: "0.3s" }}></div>
+        </div>
       </nav>
 
-      {menuOpen && (
-        <div style={{ position: "fixed", top: 72, left: 0, right: 0, background: "#FFF", padding: 40, display: "flex", flexDirection: "column", gap: 20, zIndex: 200 }}>
-          {["projects", "arsenal", "uplink"].map(link => (
-            <a key={link} href={`#${link}`} onClick={() => setMenuOpen(false)}>{link.toUpperCase()}</a>
-          ))}
-        </div>
-      )}
+      {/* Mobile Menu Overlay */}
+      <div className="mobile-menu-overlay">
+        {["projects", "arsenal", "uplink"].map(link => (
+          <a key={link} href={`#${link}`} onClick={() => setMenuOpen(false)}>{link.toUpperCase()}</a>
+        ))}
+      </div>
 
+      {/* Hero Section */}
       <section id="anim-section" className="dashboard-grid" style={{ height: `${TOTAL_FRAMES * 8}px`, position: "relative" }}>
-        <div style={{ position: "sticky", top: 0, height: "100vh", width: "100vw" }}>
+        <div style={{ position: "sticky", top: 0, height: "100vh", width: "100vw", overflow: "hidden" }}>
           <canvas ref={canvasRef} style={{ width: "100%", height: "100%", opacity: loaded ? 1 : 0 }} />
-          <div style={{ position: "absolute", left: "8%", top: "35%" }}>
-            <span style={{ fontFamily: "'JetBrains Mono'", fontSize: 12, color: "#FF3131" }}>AI & ML ENGINEER</span>
-            <h1 style={{ fontFamily: "'Syne'", fontSize: "clamp(40px, 7vw, 90px)", lineHeight: 0.9 }}>
+          <div className="hero-text" style={{ position: "absolute", left: "8%", top: "35%" }}>
+            <span style={{ fontFamily: "'JetBrains Mono'", fontSize: 12, color: "#FF3131", letterSpacing: 2 }}>AI & ML ENGINEER</span>
+            <h1 style={{ fontFamily: "'Syne'", fontSize: "clamp(3.5rem, 8vw, 6rem)", lineHeight: 0.9 }}>
               RAMJEE<br /><span style={{ color: "#111" }}>MISHRA</span>
             </h1>
-            <p style={{ marginTop: 24, maxWidth: 500, fontSize: 16, lineHeight: 1.6, color: "#475569" }}>
+            <p style={{ marginTop: 24, maxWidth: 500, fontSize: "clamp(1rem, 2vw, 1.1rem)", lineHeight: 1.6, color: "#475569" }}>
               I build practical machine learning systems from data preprocessing and feature engineering to training and deployment.
             </p>
           </div>
         </div>
       </section>
 
-      <section id="projects" style={{ padding: "120px 8%" }}>
-        <h2 style={{ fontFamily: "'Syne'", fontSize: 40, marginBottom: 60 }}>PROJECTS</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 32 }}>
+      {/* Projects Section */}
+      <section id="projects" style={{ padding: "120px 8%", maxWidth: 1400, margin: "0 auto" }}>
+        <h2 style={{ fontFamily: "'Syne'", fontSize: "clamp(2.5rem, 5vw, 3rem)", marginBottom: 60 }}>PROJECTS</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 350px), 1fr))", gap: 32 }}>
           {PROJECTS.map(p => (
             <div key={p.id} className="stark-card">
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 20 }}>
@@ -233,9 +284,9 @@ export default function StarkApp() {
                 <span style={{ fontSize: 11, color: "#00D4FF", fontWeight: 700 }}>{p.status}</span>
               </div>
               <h3 style={{ fontSize: 22, fontWeight: 700 }}>{p.title}</h3>
-              <p style={{ color: "#64748B", marginTop: 12 }}>{p.desc}</p>
-              <div style={{ marginTop: 20, fontSize: 12, color: "#64748B" }}>{p.tech}</div>
-              <a href={p.link} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 20, fontWeight: 700 }}>
+              <p style={{ color: "#64748B", marginTop: 12, flexGrow: 1 }}>{p.desc}</p>
+              <div style={{ marginTop: 20, fontSize: 12, color: "#64748B", borderTop: "1px solid #f1f1f1", paddingTop: 20 }}>{p.tech}</div>
+              <a href={p.link} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 20, fontWeight: 700, color: "#111", textDecoration: "none" }}>
                 VIEW_CODE →
               </a>
             </div>
@@ -243,35 +294,42 @@ export default function StarkApp() {
         </div>
       </section>
 
+      {/* Arsenal/Skills Section */}
       <section id="arsenal" className="dashboard-grid" style={{ padding: "120px 8%", background: "#F9FAFB" }}>
-        <h2 style={{ fontFamily: "'Syne'", fontSize: 40, marginBottom: 60, textAlign: "center" }}>SKILLS</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 40 }}>
-          {SKILLS.map(skill => (
-            <div key={skill.id}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-                <span>{skill.name}</span>
-                <span style={{ color: "#00D4FF" }}>{skill.level}%</span>
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <h2 style={{ fontFamily: "'Syne'", fontSize: "clamp(2.5rem, 5vw, 3rem)", marginBottom: 60, textAlign: "center" }}>SKILLS</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "40px 60px" }}>
+            {SKILLS.map(skill => (
+              <div key={skill.id}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10, fontFamily: "'JetBrains Mono'", fontSize: 13 }}>
+                  <span>{skill.name}</span>
+                  <span style={{ color: "#00D4FF" }}>{skill.level}%</span>
+                </div>
+                <div style={{ height: 4, background: "#E2E8F0", borderRadius: 2 }}>
+                  <div style={{ width: `${skill.level}%`, height: "100%", background: "#111", borderRadius: 2 }} />
+                </div>
               </div>
-              <div style={{ height: 4, background: "#E2E8F0" }}>
-                <div style={{ width: `${skill.level}%`, height: "100%", background: "#00D4FF" }} />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
+      {/* Contact Section */}
       <section id="uplink" style={{ padding: "140px 8%", textAlign: "center" }}>
-        <h2 style={{ fontFamily: "'Syne'", fontSize: 50, marginBottom: 40 }}>CONTACT</h2>
-        <a href="mailto:ramjeemishra23@gmail.com" style={{ padding: "20px 60px", border: "2px solid #111", textDecoration: "none", fontWeight: 700 }}>
+        <h2 style={{ fontFamily: "'Syne'", fontSize: "clamp(3rem, 10vw, 5rem)", marginBottom: 40 }}>CONTACT</h2>
+        <a href="mailto:ramjeemishra23@gmail.com" style={{ display: "inline-block", width: "min(100%, 400px)", padding: "20px", border: "2px solid #111", textDecoration: "none", fontWeight: 700, color: "#111", fontSize: 14, letterSpacing: 2 }}>
           SEND_EMAIL
         </a>
       </section>
 
-      <footer style={{ padding: "40px 8%", borderTop: "1px solid #E2E8F0", display: "flex", justifyContent: "space-between", fontSize: 12 }}>
-        <div>© 2026 RAMJEE MISHRA</div>
-        <div style={{ display: "flex", gap: 24 }}>
-          <a href="https://github.com/ramjeemishra" target="_blank">GITHUB</a>
-          <a href="https://www.linkedin.com/in/ramjee-mishra-705152291/" target="_blank">LINKEDIN</a>
+      {/* Footer */}
+      <footer style={{ padding: "60px 8%", borderTop: "1px solid #E2E8F0" }}>
+        <div className="footer-content" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 12, maxWidth: 1400, margin: "0 auto" }}>
+          <div>© 2026 RAMJEE MISHRA // BUILT FOR SCALE</div>
+          <div style={{ display: "flex", gap: 32 }}>
+            <a href="https://github.com/ramjeemishra" target="_blank" style={{ color: "#64748B", textDecoration: "none" }}>GITHUB</a>
+            <a href="https://www.linkedin.com/in/ramjee-mishra-705152291/" target="_blank" style={{ color: "#64748B", textDecoration: "none" }}>LINKEDIN</a>
+          </div>
         </div>
       </footer>
     </div>
