@@ -275,7 +275,7 @@ export default function StarkApp() {
 
       {/* Projects Section */}
       <section id="projects" style={{ padding: "120px 8%", maxWidth: 1400, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: "'Syne'", fontSize: "clamp(2.5rem, 5vw, 3rem)", marginBottom: 60 }}>PROJECTS</h2>
+        <h2 style={{ fontFamily: "'Syne'", fontSize: "clamp(2rem, 5vw, 3rem)", marginBottom: 60 }}>PROJECTS</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 350px), 1fr))", gap: 32 }}>
           {PROJECTS.map(p => (
             <div key={p.id} className="stark-card">
