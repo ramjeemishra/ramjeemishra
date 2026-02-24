@@ -196,7 +196,7 @@ export default function StarkApp() {
         @media (max-width: 768px) {
           section { padding: 80px 5% !important; }
           .hero-text { left: 5% !important; width: 90% !important; }
-          .hero-text h1 { font-size: 3.5rem !important; }
+          .hero-text h1 { font-size: 2.5rem !important; text-shadow: 3px 4px 4px rgb(251 247 247); }
           .footer-content { flex-direction: column; gap: 2rem; text-align: center; }
         }
           /* Default: Desktop */
@@ -258,12 +258,12 @@ export default function StarkApp() {
       </div>
 
       {/* Hero Section */}
-      <section id="anim-section" className="dashboard-grid" style={{ height: `${TOTAL_FRAMES * 8}px`, position: "relative" }}>
-        <div style={{ position: "sticky", top: 0, height: "100vh", width: "100vw", overflow: "hidden" }}>
+      <section id="anim-section" className="dashboard-grid" style={{ height: `${TOTAL_FRAMES * 8}px`, width: "100%", position: "relative" }}>
+        <div style={{ position: "sticky", top: 0, height: "100vh", width: "100%", overflow: "hidden" }}>
           <canvas ref={canvasRef} style={{ width: "100%", height: "100%", opacity: loaded ? 1 : 0 }} />
           <div className="hero-text" style={{ position: "absolute", left: "8%", top: "35%" }}>
             <span style={{ fontFamily: "'JetBrains Mono'", fontSize: 12, color: "#FF3131", letterSpacing: 2 }}>AI & ML ENGINEER</span>
-            <h1 style={{ fontFamily: "'Syne'", fontSize: "clamp(3.5rem, 8vw, 6rem)", lineHeight: 0.9 }}>
+            <h1 style={{ fontFamily: "'Syne'", fontSize: "clamp(3.5rem, 6vw, 5rem)", lineHeight: 0.9 }}>
               RAMJEE<br /><span style={{ color: "#111" }}>MISHRA</span>
             </h1>
             <p style={{ marginTop: 24, maxWidth: 500, fontSize: "clamp(1rem, 2vw, 1.1rem)", lineHeight: 1.6, color: "#475569" }}>
@@ -316,7 +316,7 @@ export default function StarkApp() {
 
       {/* Contact Section */}
       <section id="uplink" style={{ padding: "140px 8%", textAlign: "center" }}>
-        <h2 style={{ fontFamily: "'Syne'", fontSize: "clamp(3rem, 10vw, 5rem)", marginBottom: 40 }}>CONTACT</h2>
+        <h2 style={{ fontFamily: "'Syne'", fontSize: "clamp(2rem, 10vw, 5rem)", marginBottom: 40 }}>CONTACT</h2>
         <a href="mailto:ramjeemishra23@gmail.com" style={{ display: "inline-block", width: "min(100%, 400px)", padding: "20px", border: "2px solid #111", textDecoration: "none", fontWeight: 700, color: "#111", fontSize: 14, letterSpacing: 2 }}>
           SEND_EMAIL
         </a>
